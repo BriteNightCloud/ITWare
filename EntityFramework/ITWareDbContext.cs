@@ -1,0 +1,20 @@
+﻿using Domain.Models;
+using Domain.Models.Location.InUseLocation;
+using Domain.Models.Location.StoredLocation;
+using Microsoft.EntityFrameworkCore;
+
+namespace EntityFramework
+{
+    public class ITWareDbContext : DbContext
+    {
+        public DbSet<Equipment> Equipment { get; set; }
+        public DbSet<InUseLocation> InUseLocations { get; set; }
+        public DbSet<StoredLocation> StoredLocations { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=sqlite.db");
+            base.OnConfiguring(optionsBuilder);
+        }
+    }
+}
