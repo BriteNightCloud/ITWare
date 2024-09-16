@@ -8,5 +8,6 @@ namespace Domain.Models.Location
         public long Id { get; set; }
         public string Name { get; } = null!;
         public string? Description { get; set; }
+        public List<Equipment> Equipment { get; set; } = null!;
     }
 }

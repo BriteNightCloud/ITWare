@@ -1,0 +1,44 @@
+﻿@page "/warehouse"
+
+<div class="page">
+	<div>
+		<input type="button" value="Создать"/>
+		<input placeholder="Поиск" type="search" />
+		<input type="button" value="Обновить"/>
+		<input type="button" value="История изменений"/>
+		<input type="button" value="Выгрузить в Excel"/>
+	</div>
+	<div>
+		<p>Фильтры</p>
+		@* Генерация фильтров *@
+	</div>
+	<div>
+		<table>
+			<tr>
+				<th>Key</th>
+				<th>Value</th>
+			</tr>
+			@foreach (var item in dict)
+			{
+				<tr>
+					@foreach (var property in item.GetType().GetProperties())
+					{
+						<td>@property.GetValue(item)</td>
+					}
+				</tr>
+			}
+		</table>
+	</div>
+</div>
+
+@code {
+	public Dictionary<string, string> dict = new Dictionary<string, string>();
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		dict.Add("13", "123");
+		dict.Add("15", "22");
+		dict.Add("1113", "252");
+		dict.Add("43", "433");
+	}
+}

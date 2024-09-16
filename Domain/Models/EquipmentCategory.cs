@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Models.EquipmentCategory
+namespace Domain.Models
 {
-    public class Category
+    public class EquipmentCategory
     {
         [Key]
         public long Id { get; set; }

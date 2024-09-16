@@ -1,0 +1,20 @@
+﻿<nav class="navbar">
+	@foreach (var button in buttons)
+	{
+		<a href="@button.Value" class="nav-item">
+			<img class="nav-icon">
+			<span>@button.Key</span>
+		</a>
+	}
+</nav>
+
+@code 
+{
+	public Dictionary<string, string> buttons = new Dictionary<string, string>();
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		buttons.Add("Главная", "/");
+		buttons.Add("Склад", "/Warehouse");
+	}
+}

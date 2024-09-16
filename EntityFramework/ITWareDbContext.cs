@@ -16,5 +16,12 @@ namespace EntityFramework
             optionsBuilder.UseSqlite("Data Source=sqlite.db");
             base.OnConfiguring(optionsBuilder);
         }
-    }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ITWareDbContext).Assembly);
+            Database.Migrate();
+			base.OnModelCreating(modelBuilder);
+		}
+	}
 }
