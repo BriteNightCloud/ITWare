@@ -6,7 +6,7 @@ namespace Domain.Models.Location
     {
         [Key]
         public long Id { get; set; }
-        public string Name { get; } = null!;
+        public virtual string Name { get; } = null!;
         public string? Description { get; set; }
         public List<Equipment> Equipment { get; set; } = null!;
     }

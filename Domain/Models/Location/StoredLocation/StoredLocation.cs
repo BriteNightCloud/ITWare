@@ -2,7 +2,7 @@
 {
     public class StoredLocation : Location
     {
-        public new string Name
+        public override string Name
         {
             get
             {
