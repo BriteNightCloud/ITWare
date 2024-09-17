@@ -13,8 +13,8 @@ namespace Domain.Models
         public string? BarCode { get; set; }
         public string? SNL { get; set; }
         public string? SerialNumber { get; set; }
-        public EquipmentCategory Category { get; set; } = null!;
+        public virtual EquipmentCategory Category { get; set; } = null!;
         public EquipmentStatus Status { get; set; } = EquipmentStatus.Stored;
-        public Location.Location? Location { get; set; }
+        public virtual Location.Location? Location { get; set; }
     }
 }

@@ -9,7 +9,7 @@
                 return $"{Rack.Name} - {Shelf.Name}";
             }
         }
-        public Rack Rack { get; set; } = null!;
-        public Shelf Shelf { get; set; } = null!;
+        public virtual Rack Rack { get; set; } = null!;
+        public virtual Shelf Shelf { get; set; } = null!;
     }
 }

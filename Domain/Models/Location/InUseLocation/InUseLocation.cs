@@ -9,7 +9,7 @@
                 return $"{Building.Name} - {Area.Name}";
             }
         }
-        public Building Building { get; set; } = null!;
-        public Area Area { get; set; } = null!;
+        public virtual Building Building { get; set; } = null!;
+        public virtual Area Area { get; set; } = null!;
     }
 }

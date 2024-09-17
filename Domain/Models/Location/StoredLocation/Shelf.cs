@@ -9,6 +9,6 @@ namespace Domain.Models.Location.StoredLocation
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public string BarCode { get; set; } = null!;
-        public Rack Rack { get; set; } = null!;
+        public virtual Rack Rack { get; set; } = null!;
     }
 }

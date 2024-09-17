@@ -8,6 +8,6 @@ namespace Domain.Models.Location.InUseLocation
         public long Id { get; set; }
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
-        public Building Building { get; set; } = null!;
+        public virtual Building Building { get; set; } = null!;
     }
 }
