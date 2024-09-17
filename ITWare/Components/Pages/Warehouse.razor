@@ -1,12 +1,17 @@
 ﻿@page "/warehouse"
+@using EntityFramework
+@using Microsoft.EntityFrameworkCore.Metadata
+@using System.Linq.Expressions
+
+@inject ITWareDbContext db
 
 <div class="page">
 	<div>
-		<input type="button" value="Создать"/>
+		<input type="button" value="Создать" />
 		<input placeholder="Поиск" type="search" />
-		<input type="button" value="Обновить"/>
-		<input type="button" value="История изменений"/>
-		<input type="button" value="Выгрузить в Excel"/>
+		<input type="button" value="Обновить" />
+		<input type="button" value="История изменений" />
+		<input type="button" value="Выгрузить в Excel" />
 	</div>
 	<div>
 		<p>Фильтры</p>
@@ -14,31 +19,55 @@
 	</div>
 	<div>
 		<table>
-			<tr>
-				<th>Key</th>
-				<th>Value</th>
-			</tr>
-			@foreach (var item in dict)
-			{
+			<thead>
 				<tr>
-					@foreach (var property in item.GetType().GetProperties())
+					@foreach (var item in GetProperties())
 					{
-						<td>@property.GetValue(item)</td>
+						<th>@item.Name</th>
 					}
 				</tr>
-			}
+			</thead>
+			<tbody>
+				@foreach (var item in db.Equipment)
+				{
+					<tr>
+						@foreach (var property in GetProperties())
+						{
+							<td>@GetPropertyValue(item, property)</td>
+						}
+					</tr>
+				}
+			</tbody>
 		</table>
 	</div>
 </div>
 
 @code {
-	public Dictionary<string, string> dict = new Dictionary<string, string>();
+	private Dictionary<string, Func<object, object>> _propertyGetters = null!;
+
+	private object GetPropertyValue(object item, IProperty property)
+	{
+		return _propertyGetters[property.Name](item);
+	}
+
+	private List<IProperty> GetProperties()
+	{
+		var list = db.Equipment.EntityType.GetProperties().Where(p => !p.IsPrimaryKey()).ToList();
+		list.Sort((a,b) => b.Name.CompareTo(a.Name));
+		return list;
+	}
+
 	protected override void OnInitialized()
 	{
-		base.OnInitialized();
-		dict.Add("13", "123");
-		dict.Add("15", "22");
-		dict.Add("1113", "252");
-		dict.Add("43", "433");
+		_propertyGetters = GetProperties()
+			.ToDictionary(
+				p => p.Name,
+				p =>
+				{
+					var parameter = Expression.Parameter(typeof(object));
+					var convertedProperty = Expression.Property(Expression.Convert(parameter, typeof(Equipment)), p.Name); //TODO: Fix
+					var expression = Expression.Lambda<Func<object, object>>(Expression.Convert(convertedProperty, typeof(object)), parameter);
+					return expression.Compile();
+				});
 	}
 }

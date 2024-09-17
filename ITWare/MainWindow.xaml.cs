@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using EntityFramework;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ITWare
@@ -13,6 +14,7 @@ namespace ITWare
             InitializeComponent();
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddWpfBlazorWebView();
+            serviceCollection.AddDbContext<ITWareDbContext>(optionsLifetime: ServiceLifetime.Singleton);
 #if DEBUG
             serviceCollection.AddBlazorWebViewDeveloperTools();
 #endif

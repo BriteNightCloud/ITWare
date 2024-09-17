@@ -10,6 +10,7 @@ namespace EntityFramework
         public DbSet<Equipment> Equipment { get; set; }
         public DbSet<InUseLocation> InUseLocations { get; set; }
         public DbSet<StoredLocation> StoredLocations { get; set; }
+        public DbSet<EquipmentCategory> EquipmentCategory { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -17,11 +18,11 @@ namespace EntityFramework
             base.OnConfiguring(optionsBuilder);
         }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ITWareDbContext).Assembly);
             Database.Migrate();
-			base.OnModelCreating(modelBuilder);
-		}
-	}
+            base.OnModelCreating(modelBuilder);
+        }
+    }
 }
