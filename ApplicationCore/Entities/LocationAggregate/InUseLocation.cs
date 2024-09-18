@@ -1,6 +1,6 @@
-﻿namespace ApplicationCore.Models.Location.InUseLocation
+﻿namespace ApplicationCore.Entities.LocationAggregate
 {
-    public class InUseLocation : Location
+    public class InUseLocation : BaseLocation
     {
         public override string Name
         {

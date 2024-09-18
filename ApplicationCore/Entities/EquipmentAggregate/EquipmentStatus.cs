@@ -1,4 +1,4 @@
-﻿namespace ApplicationCore.Models
+﻿namespace ApplicationCore.Entities.EquipmentAggregate
 {
     public enum EquipmentStatus
     {

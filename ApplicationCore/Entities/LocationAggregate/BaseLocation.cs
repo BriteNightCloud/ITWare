@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ApplicationCore.Entities.EquipmentAggregate;
 
-namespace ApplicationCore.Models.Location
+namespace ApplicationCore.Entities.LocationAggregate
 {
-    public class Location
+    public abstract class BaseLocation : BaseEntity
     {
-        [Key]
-        public long Id { get; set; }
         public virtual string Name { get; } = null!;
         public string? Description { get; set; }
         public virtual List<Equipment> Equipment { get; set; } = null!;

@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
-using WPF_UI.Configurations;
 
 namespace WPF_UI
 {
@@ -13,19 +12,21 @@ namespace WPF_UI
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			var host = Host.CreateDefaultBuilder()
-				.ConfigureServices(services =>
-				{
-					services.AddWpfBlazorWebView();
-					services.AddSingleton<MainWindow>();
-					services.AddDbContext<ITWareDbContext>(ServiceLifetime.Scoped);
-					services.AddSingleton<DatabaseInfo>();
-#if DEBUG
-					services.AddBlazorWebViewDeveloperTools();
-#endif
-				})
 				.ConfigureAppConfiguration(config =>
 				{
 					config.AddJsonFile("appconfig.json", optional: false, reloadOnChange: true);
+				})
+				.ConfigureServices((hostContext, services) =>
+				{
+					services.Configure<IConfiguration>(hostContext.Configuration);
+
+					services.AddWpfBlazorWebView();
+					services.AddSingleton<MainWindow>();
+					services.AddDbContext<ITWareDbContext>(ServiceLifetime.Scoped);
+					services.AddScoped(typeof(Repository<>));
+#if DEBUG
+					services.AddBlazorWebViewDeveloperTools();
+#endif
 				})
 				.Build();
 

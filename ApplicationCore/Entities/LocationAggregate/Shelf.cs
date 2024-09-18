@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ApplicationCore.Models.Location.StoredLocation
+﻿namespace ApplicationCore.Entities.LocationAggregate
 {
-    public class Shelf
+    public class Shelf : BaseEntity
     {
-        [Key]
-        public long Id { get; set; }
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public string BarCode { get; set; } = null!;

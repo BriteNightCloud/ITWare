@@ -1,23 +1,28 @@
-﻿using ApplicationCore.Models;
-using ApplicationCore.Models.Location;
-using ApplicationCore.Models.Location.InUseLocation;
-using ApplicationCore.Models.Location.StoredLocation;
-using Castle.Core.Configuration;
+﻿using ApplicationCore.Entities.EquipmentAggregate;
+using ApplicationCore.Entities.LocationAggregate;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Data
 {
     public class ITWareDbContext : DbContext
     {
+        private readonly IConfiguration _configuration;
+
+		public ITWareDbContext(IConfiguration configuration)
+		{
+			_configuration = configuration;
+		}
+
 		public DbSet<Equipment> Equipment { get; set; }
-        public DbSet<Location> Locations { get; set; }
+        public DbSet<BaseLocation> Locations { get; set; }
         public DbSet<InUseLocation> InUseLocations { get; set; }
         public DbSet<StoredLocation> StoredLocations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.UseSqlite("Data Source=sqlite.db"); // TODO: Get Connection string from Configuration
+            optionsBuilder.UseSqlite(_configuration["ConnectionString"]);
             base.OnConfiguring(optionsBuilder);
         }
 

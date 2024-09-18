@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ApplicationCore.Entities.LocationAggregate;
 
-namespace ApplicationCore.Models
+namespace ApplicationCore.Entities.EquipmentAggregate
 {
-    public class Equipment
-    {
-        [Key]
-        public long Id { get; set; }
+    public class Equipment : BaseEntity
+	{
         public string Name { get; set; } = null!;
         public string? NetworkName { get; set; }
         public string? Description { get; set; }
@@ -15,6 +13,6 @@ namespace ApplicationCore.Models
         public string? SerialNumber { get; set; }
         public virtual EquipmentCategory Category { get; set; } = null!;
         public EquipmentStatus Status { get; set; } = EquipmentStatus.Stored;
-        public virtual Location.Location? Location { get; set; }
+        public virtual BaseLocation? Location { get; set; }
     }
 }

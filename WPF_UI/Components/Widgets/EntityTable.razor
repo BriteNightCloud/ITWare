@@ -1,11 +1,5 @@
-﻿@typeparam TEntity where TEntity : class
-
-@using ApplicationCore.Models.Location.StoredLocation
-@using Microsoft.EntityFrameworkCore
-@using Microsoft.EntityFrameworkCore.Metadata
-@using System.Linq.Expressions
-
-@inject ITWareDbContext db
+﻿@typeparam TEntity where TEntity : BaseEntity
+@inject Repository<TEntity> repository
 
 <table>
 	<thead>
@@ -17,7 +11,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var entity in db.Set<TEntity>().ToList())
+		@foreach (var entity in repository.ListAsync().Result)
 		{
 			<tr>
 				@foreach (var column in Columns)

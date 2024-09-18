@@ -1,6 +1,6 @@
-﻿namespace ApplicationCore.Models.Location.StoredLocation
+﻿namespace ApplicationCore.Entities.LocationAggregate
 {
-    public class StoredLocation : Location
+    public class StoredLocation : BaseLocation
     {
         public override string Name
         {
