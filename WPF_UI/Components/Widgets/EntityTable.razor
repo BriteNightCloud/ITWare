@@ -1,0 +1,35 @@
+﻿@typeparam TEntity where TEntity : class
+
+@using ApplicationCore.Models.Location.StoredLocation
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.EntityFrameworkCore.Metadata
+@using System.Linq.Expressions
+
+@inject ITWareDbContext db
+
+<table>
+	<thead>
+		<tr>
+			@foreach (var column in Columns)
+			{
+				<th>@column.Value</th>
+			}
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var entity in db.Set<TEntity>().ToList())
+		{
+			<tr>
+				@foreach (var column in Columns)
+				{
+					<td>@column.Key.Invoke(entity)</td>
+				}
+			</tr>
+		}
+	</tbody>
+</table>
+
+@code {
+	[Parameter, EditorRequired]
+	public Dictionary<Func<TEntity, string?>, string> Columns { get; set; } = null!;
+}
