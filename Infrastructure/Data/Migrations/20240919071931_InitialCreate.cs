@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateInitial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,8 +15,7 @@ namespace Infrastructure.Migrations
                 name: "Building",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -28,8 +28,7 @@ namespace Infrastructure.Migrations
                 name: "EquipmentCategory",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -42,8 +41,7 @@ namespace Infrastructure.Migrations
                 name: "Rack",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     BarCode = table.Column<string>(type: "TEXT", nullable: false)
@@ -57,11 +55,10 @@ namespace Infrastructure.Migrations
                 name: "Area",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    BuildingId = table.Column<long>(type: "INTEGER", nullable: false)
+                    BuildingId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,12 +75,11 @@ namespace Infrastructure.Migrations
                 name: "Shelf",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     BarCode = table.Column<string>(type: "TEXT", nullable: false),
-                    RackId = table.Column<long>(type: "INTEGER", nullable: false)
+                    RackId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,14 +96,13 @@ namespace Infrastructure.Migrations
                 name: "Locations",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Discriminator = table.Column<string>(type: "TEXT", maxLength: 21, nullable: false),
-                    BuildingId = table.Column<long>(type: "INTEGER", nullable: true),
-                    AreaId = table.Column<long>(type: "INTEGER", nullable: true),
-                    RackId = table.Column<long>(type: "INTEGER", nullable: true),
-                    ShelfId = table.Column<long>(type: "INTEGER", nullable: true)
+                    BuildingId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    AreaId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    RackId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ShelfId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -142,8 +137,7 @@ namespace Infrastructure.Migrations
                 name: "Equipment",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     NetworkName = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
@@ -151,9 +145,9 @@ namespace Infrastructure.Migrations
                     BarCode = table.Column<string>(type: "TEXT", nullable: true),
                     SNL = table.Column<string>(type: "TEXT", nullable: true),
                     SerialNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    CategoryId = table.Column<long>(type: "INTEGER", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Status = table.Column<string>(type: "TEXT", nullable: false),
-                    LocationId = table.Column<long>(type: "INTEGER", nullable: true)
+                    LocationId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

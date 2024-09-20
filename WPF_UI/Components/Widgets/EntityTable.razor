@@ -1,5 +1,4 @@
-﻿@typeparam TEntity where TEntity : BaseEntity
-@inject Repository<TEntity> repository
+﻿@typeparam TEntity
 
 <table>
 	<thead>
@@ -11,7 +10,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var entity in repository.ListAsync().Result)
+		@foreach (var entity in Entities)
 		{
 			<tr>
 				@foreach (var column in Columns)
@@ -26,4 +25,7 @@
 @code {
 	[Parameter, EditorRequired]
 	public Dictionary<Func<TEntity, string?>, string> Columns { get; set; } = null!;
+
+	[Parameter, EditorRequired]
+	public IEnumerable<TEntity> Entities { get; set; } = null!;
 }

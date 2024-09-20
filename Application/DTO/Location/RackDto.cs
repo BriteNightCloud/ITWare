@@ -1,10 +1,10 @@
-﻿namespace ApplicationCore.Entities.LocationAggregate
+﻿namespace ApplicationCore.DTO.Location
 {
-    public class Rack : BaseEntity
+    public class RackDto
     {
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public string BarCode { get; set; } = null!;
-        public virtual List<Shelf> Shelves { get; set; } = null!;
+        public List<ShelfDto> Shelves { get; set; } = null!;
     }
 }

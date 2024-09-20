@@ -21,17 +21,17 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true);
 
-            modelBuilder.Entity("ApplicationCore.Models.Equipment", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.EquipmentAggregate.Equipment", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("BarCode")
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("CategoryId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Count")
                         .HasColumnType("INTEGER");
@@ -39,8 +39,8 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<long?>("LocationId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid?>("LocationId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -68,11 +68,11 @@ namespace Infrastructure.Migrations
                     b.ToTable("Equipment");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.EquipmentCategory", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.EquipmentAggregate.EquipmentCategory", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
@@ -86,14 +86,14 @@ namespace Infrastructure.Migrations
                     b.ToTable("EquipmentCategory");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.InUseLocation.Area", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.Area", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
-                    b.Property<long>("BuildingId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("BuildingId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
@@ -109,29 +109,11 @@ namespace Infrastructure.Migrations
                     b.ToTable("Area");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.InUseLocation.Building", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.BaseLocation", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
                         .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Building");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Models.Location.Location", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
@@ -145,16 +127,34 @@ namespace Infrastructure.Migrations
 
                     b.ToTable("Locations");
 
-                    b.HasDiscriminator().HasValue("Location");
+                    b.HasDiscriminator().HasValue("BaseLocation");
 
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.StoredLocation.Rack", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.Building", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Building");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.Rack", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("BarCode")
                         .IsRequired()
@@ -172,11 +172,11 @@ namespace Infrastructure.Migrations
                     b.ToTable("Rack");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.StoredLocation.Shelf", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.Shelf", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("BarCode")
                         .IsRequired()
@@ -189,8 +189,8 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("RackId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("RackId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -199,15 +199,15 @@ namespace Infrastructure.Migrations
                     b.ToTable("Shelf");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.InUseLocation.InUseLocation", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.InUseLocation", b =>
                 {
-                    b.HasBaseType("ApplicationCore.Models.Location.Location");
+                    b.HasBaseType("ApplicationCore.Entities.LocationAggregate.BaseLocation");
 
-                    b.Property<long>("AreaId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("AreaId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<long>("BuildingId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("BuildingId")
+                        .HasColumnType("TEXT");
 
                     b.HasIndex("AreaId");
 
@@ -216,15 +216,15 @@ namespace Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("InUseLocation");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.StoredLocation.StoredLocation", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.StoredLocation", b =>
                 {
-                    b.HasBaseType("ApplicationCore.Models.Location.Location");
+                    b.HasBaseType("ApplicationCore.Entities.LocationAggregate.BaseLocation");
 
-                    b.Property<long>("RackId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("RackId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<long>("ShelfId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("ShelfId")
+                        .HasColumnType("TEXT");
 
                     b.HasIndex("RackId");
 
@@ -233,15 +233,15 @@ namespace Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("StoredLocation");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Equipment", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.EquipmentAggregate.Equipment", b =>
                 {
-                    b.HasOne("ApplicationCore.Models.EquipmentCategory", "Category")
+                    b.HasOne("ApplicationCore.Entities.EquipmentAggregate.EquipmentCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApplicationCore.Models.Location.Location", "Location")
+                    b.HasOne("ApplicationCore.Entities.LocationAggregate.BaseLocation", "Location")
                         .WithMany("Equipment")
                         .HasForeignKey("LocationId");
 
@@ -250,9 +250,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.InUseLocation.Area", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.Area", b =>
                 {
-                    b.HasOne("ApplicationCore.Models.Location.InUseLocation.Building", "Building")
+                    b.HasOne("ApplicationCore.Entities.LocationAggregate.Building", "Building")
                         .WithMany("Areas")
                         .HasForeignKey("BuildingId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -261,9 +261,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Building");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.StoredLocation.Shelf", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.Shelf", b =>
                 {
-                    b.HasOne("ApplicationCore.Models.Location.StoredLocation.Rack", "Rack")
+                    b.HasOne("ApplicationCore.Entities.LocationAggregate.Rack", "Rack")
                         .WithMany("Shelves")
                         .HasForeignKey("RackId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -272,15 +272,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Rack");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.InUseLocation.InUseLocation", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.InUseLocation", b =>
                 {
-                    b.HasOne("ApplicationCore.Models.Location.InUseLocation.Area", "Area")
+                    b.HasOne("ApplicationCore.Entities.LocationAggregate.Area", "Area")
                         .WithMany()
                         .HasForeignKey("AreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApplicationCore.Models.Location.InUseLocation.Building", "Building")
+                    b.HasOne("ApplicationCore.Entities.LocationAggregate.Building", "Building")
                         .WithMany()
                         .HasForeignKey("BuildingId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -291,15 +291,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Building");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.StoredLocation.StoredLocation", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.StoredLocation", b =>
                 {
-                    b.HasOne("ApplicationCore.Models.Location.StoredLocation.Rack", "Rack")
+                    b.HasOne("ApplicationCore.Entities.LocationAggregate.Rack", "Rack")
                         .WithMany()
                         .HasForeignKey("RackId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApplicationCore.Models.Location.StoredLocation.Shelf", "Shelf")
+                    b.HasOne("ApplicationCore.Entities.LocationAggregate.Shelf", "Shelf")
                         .WithMany()
                         .HasForeignKey("ShelfId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -310,17 +310,17 @@ namespace Infrastructure.Migrations
                     b.Navigation("Shelf");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.InUseLocation.Building", b =>
-                {
-                    b.Navigation("Areas");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Models.Location.Location", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.BaseLocation", b =>
                 {
                     b.Navigation("Equipment");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Models.Location.StoredLocation.Rack", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.Building", b =>
+                {
+                    b.Navigation("Areas");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.LocationAggregate.Rack", b =>
                 {
                     b.Navigation("Shelves");
                 });

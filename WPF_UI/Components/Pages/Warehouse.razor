@@ -1,4 +1,8 @@
 ﻿@page "/warehouse"
+@using ApplicationCore.DTO.Equipment
+@using ApplicationCore.DTO.Location
+
+@inject EquipmentService equipmentService
 
 <div class="page">
 	<div>
@@ -13,18 +17,20 @@
 		@* Генерация фильтров *@
 	</div>
 	<div>
-		<EntityTable TEntity="Equipment" Columns="@columns" />
+		<EntityTable TEntity="EquipmentDto" Entities="Equipment" Columns="@columns" />
 	</div>
 </div>
 
 @code {
-	private Dictionary<Func<Equipment, string?>, string> columns = new Dictionary<Func<Equipment, string?>, string>();
-
 	protected override Task OnInitializedAsync()
 	{
+		Equipment = equipmentService.GetAll();
 		SetColumns();
 		return base.OnInitializedAsync();
 	}
+
+	private Dictionary<Func<EquipmentDto, string?>, string> columns = new Dictionary<Func<EquipmentDto, string?>, string>();
+	private IEnumerable<EquipmentDto> Equipment { get; set; } = null!;
 
 	private void SetColumns()
 	{

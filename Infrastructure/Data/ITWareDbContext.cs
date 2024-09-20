@@ -1,5 +1,5 @@
-﻿using ApplicationCore.Entities.EquipmentAggregate;
-using ApplicationCore.Entities.LocationAggregate;
+﻿using Domain.Entities.EquipmentAggregate;
+using Domain.Entities.LocationAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -9,15 +9,15 @@ namespace Infrastructure.Data
     {
         private readonly IConfiguration _configuration;
 
-		public ITWareDbContext(IConfiguration configuration)
-		{
-			_configuration = configuration;
-		}
+        public ITWareDbContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
-		public DbSet<Equipment> Equipment { get; set; }
-        public DbSet<BaseLocation> Locations { get; set; }
-        public DbSet<InUseLocation> InUseLocations { get; set; }
-        public DbSet<StoredLocation> StoredLocations { get; set; }
+        public DbSet<EquipmentDb> Equipment { get; set; }
+        public DbSet<LocationBaseDb> Locations { get; set; }
+        public DbSet<InUseLocationDb> InUseLocations { get; set; }
+        public DbSet<StoredLocationDb> StoredLocations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

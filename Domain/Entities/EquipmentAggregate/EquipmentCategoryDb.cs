@@ -1,7 +1,7 @@
-﻿namespace ApplicationCore.Entities.EquipmentAggregate
+﻿namespace Domain.Entities.EquipmentAggregate
 {
-    public class EquipmentCategory : BaseEntity
-	{
+    public class EquipmentCategoryDb : EntityBase
+    {
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
     }
