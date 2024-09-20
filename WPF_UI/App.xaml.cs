@@ -1,7 +1,4 @@
-﻿using ApplicationCore.Services;
-using Domain.Entities.EquipmentAggregate;
-using Domain.Entities.LocationAggregate;
-using Domain.Interfaces.Repositories;
+﻿using ApplicationLayer.Services;
 using Domain.Interfaces.Repositories.Equipment;
 using Domain.Interfaces.Repositories.Location;
 using Infrastructure.Data;
@@ -14,7 +11,7 @@ using System.Windows;
 
 namespace WPF_UI
 {
-    public partial class App : Application
+	public partial class App : Application
 	{
 		protected override void OnStartup(StartupEventArgs e)
 		{
@@ -31,9 +28,11 @@ namespace WPF_UI
 					services.AddSingleton<MainWindow>();
 					services.AddDbContext<ITWareDbContext>(ServiceLifetime.Scoped);
 					services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+					services.AddScoped<IEquipmentCategoryRepository, EquipmentCategoryRepository>();
 					services.AddScoped<IStoredLocationRepository, StoredLocationRepository>();
 					services.AddScoped<IInUseLocationRepository, InUseLocationRepository>();
 					services.AddScoped<EquipmentService>();
+					services.AddScoped<EquipmentCategoryService>();
 #if DEBUG
 					services.AddBlazorWebViewDeveloperTools();
 #endif

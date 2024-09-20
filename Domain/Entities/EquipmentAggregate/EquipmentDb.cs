@@ -1,8 +1,10 @@
 ﻿using Domain.Entities.LocationAggregate;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities.EquipmentAggregate
 {
-    public class EquipmentDb : EntityBase
+	[Table("Equipment")]
+	public class EquipmentDb : EntityBase
     {
         public string Name { get; set; } = null!;
         public string? NetworkName { get; set; }

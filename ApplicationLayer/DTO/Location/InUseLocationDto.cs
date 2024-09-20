@@ -1,4 +1,4 @@
-﻿namespace ApplicationCore.DTO.Location
+﻿namespace ApplicationLayer.DTO.Location
 {
     public class InUseLocationDto : LocationBaseDto
     {

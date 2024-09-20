@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CreateInitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -93,7 +93,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Locations",
+                name: "Location",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
@@ -106,27 +106,27 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Locations", x => x.Id);
+                    table.PrimaryKey("PK_Location", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Locations_Area_AreaId",
+                        name: "FK_Location_Area_AreaId",
                         column: x => x.AreaId,
                         principalTable: "Area",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Locations_Building_BuildingId",
+                        name: "FK_Location_Building_BuildingId",
                         column: x => x.BuildingId,
                         principalTable: "Building",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Locations_Rack_RackId",
+                        name: "FK_Location_Rack_RackId",
                         column: x => x.RackId,
                         principalTable: "Rack",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Locations_Shelf_ShelfId",
+                        name: "FK_Location_Shelf_ShelfId",
                         column: x => x.ShelfId,
                         principalTable: "Shelf",
                         principalColumn: "Id",
@@ -159,9 +159,9 @@ namespace Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Equipment_Locations_LocationId",
+                        name: "FK_Equipment_Location_LocationId",
                         column: x => x.LocationId,
-                        principalTable: "Locations",
+                        principalTable: "Location",
                         principalColumn: "Id");
                 });
 
@@ -181,23 +181,23 @@ namespace Infrastructure.Migrations
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locations_AreaId",
-                table: "Locations",
+                name: "IX_Location_AreaId",
+                table: "Location",
                 column: "AreaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locations_BuildingId",
-                table: "Locations",
+                name: "IX_Location_BuildingId",
+                table: "Location",
                 column: "BuildingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locations_RackId",
-                table: "Locations",
+                name: "IX_Location_RackId",
+                table: "Location",
                 column: "RackId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locations_ShelfId",
-                table: "Locations",
+                name: "IX_Location_ShelfId",
+                table: "Location",
                 column: "ShelfId");
 
             migrationBuilder.CreateIndex(
@@ -216,7 +216,7 @@ namespace Infrastructure.Migrations
                 name: "EquipmentCategory");
 
             migrationBuilder.DropTable(
-                name: "Locations");
+                name: "Location");
 
             migrationBuilder.DropTable(
                 name: "Area");

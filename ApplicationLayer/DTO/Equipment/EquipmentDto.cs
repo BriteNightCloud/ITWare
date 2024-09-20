@@ -1,9 +1,10 @@
-﻿using ApplicationCore.DTO.Location;
+﻿using ApplicationLayer.DTO.Location;
 
-namespace ApplicationCore.DTO.Equipment
+namespace ApplicationLayer.DTO.Equipment
 {
-    public class EquipmentDto
+	public class EquipmentDto
     {
+        public Guid Id { get; set; }
         public string Name { get; set; } = null!;
         public string? NetworkName { get; set; }
         public string? Description { get; set; }

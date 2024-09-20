@@ -1,5 +1,8 @@
-﻿namespace Domain.Entities.LocationAggregate
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Entities.LocationAggregate
 {
+    [Table("Rack")]
     public class RackDb : EntityBase
     {
         public string Name { get; set; } = null!;

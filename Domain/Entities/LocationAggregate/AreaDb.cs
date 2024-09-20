@@ -1,6 +1,9 @@
-﻿namespace Domain.Entities.LocationAggregate
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Entities.LocationAggregate
 {
-    public class AreaDb : EntityBase
+	[Table("Area")]
+	public class AreaDb : EntityBase
     {
         public string Name { get; set; } = null!;
         public string? Description { get; set; }

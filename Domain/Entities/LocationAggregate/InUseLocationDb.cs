@@ -1,5 +1,8 @@
-﻿namespace Domain.Entities.LocationAggregate
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Entities.LocationAggregate
 {
+	[Table("Location")]
 	public class InUseLocationDb : LocationBaseDb
 	{
 		public override string Name

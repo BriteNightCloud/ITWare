@@ -1,6 +1,5 @@
 ﻿using Domain.Entities.EquipmentAggregate;
 using Domain.Interfaces.Repositories.Equipment;
-using Infrastructure.Data;
 
 namespace Infrastructure.Data.Repositories
 {

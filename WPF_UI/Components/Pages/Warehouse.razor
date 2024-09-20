@@ -1,6 +1,6 @@
 ﻿@page "/warehouse"
-@using ApplicationCore.DTO.Equipment
-@using ApplicationCore.DTO.Location
+@using ApplicationLayer.DTO.Equipment
+@using ApplicationLayer.DTO.Location
 
 @inject EquipmentService equipmentService
 
@@ -34,7 +34,7 @@
 
 	private void SetColumns()
 	{
-		columns.Add(e => e.Category.Name, "Тип");
+		columns.Add(e => e.Category?.Name, "Тип");
 		columns.Add(e => e.Name, "Название");
 		columns.Add(e => e.NetworkName, "Сетевое имя");
 		columns.Add(e => e.SNL, "SNL");

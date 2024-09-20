@@ -1,5 +1,8 @@
-﻿namespace Domain.Entities.LocationAggregate
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Entities.LocationAggregate
 {
+    [Table("Shelf")]
     public class ShelfDb : EntityBase
     {
         public string Name { get; set; } = null!;

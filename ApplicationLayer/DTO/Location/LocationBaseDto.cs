@@ -1,6 +1,6 @@
-﻿using ApplicationCore.DTO.Equipment;
+﻿using ApplicationLayer.DTO.Equipment;
 
-namespace ApplicationCore.DTO.Location
+namespace ApplicationLayer.DTO.Location
 {
     public class LocationBaseDto
     {
