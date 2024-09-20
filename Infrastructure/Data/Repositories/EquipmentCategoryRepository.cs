@@ -1,5 +1,6 @@
 ﻿using Domain.Entities.EquipmentAggregate;
 using Domain.Interfaces.Repositories.Equipment;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data.Repositories
 {
@@ -13,8 +14,8 @@ namespace Infrastructure.Data.Repositories
 
         public EquipmentCategoryDb GetByEquipmentId(Guid id)
 		{
-			var result = _db.Equipment.???.Where(x => x.Category.Id == id).Select(x => x.Category).First();
-			return result;
+			var result = _db.Equipment.Include(x => x.Category).Where(x => x.Id.ToString().Equals(id.ToString())).Select(x => x.Category);
+			return result.First();
 		}
 	}
 }
